@@ -2,7 +2,7 @@
   "name": "crecer-mejor",
   "image": "mcr.microsoft.com/devcontainers/python:3.11",
 
-  "postCreateCommand": "pip install --user -r requirements.txt",
+  "postCreateCommand": "pip install --user --upgrade pip setuptools wheel six && pip install --user --no-build-isolation -r requirements.txt",
 
   "forwardPorts": [8501],
   "portsAttributes": {
