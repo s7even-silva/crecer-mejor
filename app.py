@@ -137,7 +137,7 @@ elif pantalla == "Perfil del nino":
         resultado = motor.evaluar_nino(nino.to_dict(), meds, fecha_referencia=fecha_referencia_para(meds))
 
         prio = resultado["prioridad"]
-        st.subheader(f"{NIVEL_COLOR.get(prio['nivel'], '')} Prioridad: {prio['nivel']} ({prio['puntaje']}/100)")
+        st.subheader(f"{NIVEL_COLOR.get(prio['nivel'], '')} Prioridad: {prio['nivel']} ({prio['puntaje']}%)")
         for razon in prio["razones"]:
             st.markdown(f"- {razon}")
 
@@ -232,7 +232,7 @@ elif pantalla == "Nueva medicion":
             prio = resultado["prioridad"]
             st.subheader(
                 f"{NIVEL_COLOR.get(prio['nivel'], '')} Nueva prioridad: "
-                f"{prio['nivel']} ({prio['puntaje']}/100)"
+                f"{prio['nivel']} ({prio['puntaje']}%)"
             )
             for razon in prio["razones"]:
                 st.markdown(f"- {razon}")
