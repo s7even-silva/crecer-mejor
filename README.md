@@ -29,6 +29,11 @@ recorta la propuesta original a lo que es viable en 18 horas).
 Ver `CONTRIBUTING.md` para el flujo de trabajo en equipo (ramas, division de
 archivos por persona, reglas de la noche).
 
+**Si vas a usar un asistente de IA para programar** (Claude Code, Codex u
+otro), dile que lea `PROYECTO_IA.md` primero — ahi tiene el contexto del
+proyecto, su rol, y las instrucciones para mantener actualizado su archivo
+de estado en `docs/estado_<rol>.md` y `docs/ESTADO_GENERAL.md`.
+
 ## Estructura
 
 ```

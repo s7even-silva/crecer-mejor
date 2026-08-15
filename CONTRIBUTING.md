@@ -3,6 +3,11 @@
 Stack: Python + Streamlit + pygrowup. Sin Supabase, sin Next.js, sin ML entrenado.
 Razones completas en `Crecer_Mejor_v2_Documento_Corregido.md`.
 
+Si vas a usar un asistente de IA para programar (Claude Code, Codex u otro),
+dile primero que lea `PROYECTO_IA.md` — trae el contexto completo del
+proyecto y las instrucciones para mantener su archivo de estado actualizado
+en `docs/estado_<rol>.md`.
+
 ## Codespaces
 
 1. En GitHub, entra al repo `crecer-mejor` -> boton verde `Code` -> pestana `Codespaces` -> `Create codespace on main`.
@@ -35,12 +40,14 @@ Reglas para que esto no choque:
 
 ## Division de archivos por persona
 
-| Persona | Archivo(s) | Rol |
-|---|---|---|
-| A | `motor.py`, `verificacion.py` | Motor antropometrico, golden dataset, tabla de verificacion |
-| B | `datos/ninos.csv`, `datos/mediciones.csv` | Datos sinteticos, casos de unidades/fuentes mixtas |
-| C | `app.py` | Interfaz Streamlit: radar, perfil, registro, verificacion |
-| D | `README.md`, diapositivas (fuera del repo o en `docs/`) | Pitch, cifras ENDES, normativa, ensayo, plan B de demo |
+| Persona | Archivo(s) | Estado | Rol |
+|---|---|---|---|
+| A | `motor.py`, `verificacion.py` | `docs/estado_motor.md` | Motor antropometrico, golden dataset, tabla de verificacion |
+| B | `datos/ninos.csv`, `datos/mediciones.csv` | `docs/estado_datos.md` | Datos sinteticos, casos de unidades/fuentes mixtas |
+| C | `app.py` | `docs/estado_app.md` | Interfaz Streamlit: radar, perfil, registro, verificacion |
+| D | `README.md`, diapositivas (fuera del repo o en `docs/`) | `docs/estado_pitch.md` | Pitch, cifras ENDES, normativa, ensayo, plan B de demo |
+
+Todos anaden ademas una linea de progreso a `docs/ESTADO_GENERAL.md`.
 
 ## Regla de oro
 
