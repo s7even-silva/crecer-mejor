@@ -1,5 +1,11 @@
 # Como trabajamos esta noche
 
+> **Nota (rama `arquitectura-v2`):** lo de abajo describe el plan original
+> de la hackaton (Streamlit-only). Esta rama agrega `backend/` (FastAPI +
+> Postgres) y `frontend/` (Next.js) en paralelo, sin invalidar el motor ni
+> el flujo de main directa descrito aqui. Ver README.md para el detalle de
+> la arquitectura y las URLs de produccion.
+
 Stack: Python + Streamlit + pygrowup. Sin Supabase, sin Next.js, sin ML entrenado.
 Razones completas en `Crecer_Mejor_v2_Documento_Corregido.md`.
 
