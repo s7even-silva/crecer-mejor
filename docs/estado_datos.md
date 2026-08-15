@@ -7,7 +7,24 @@ Archivos de tu rol: `datos/ninos.csv`, `datos/mediciones.csv`, la parte de
 
 ## Que hiciste (mas reciente arriba)
 
-- 2026-08-15 — Ampliado el dataset: +20 ninos de relleno (N015-N034, con
+- 2026-08-15 — **Regenerados** los 20 ninos de relleno (N015-N034): la
+  primera version (generada con un modelo de crecimiento aproximado a
+  mano) producia trayectorias con T/E de -4 a -6 DE en casi todos los
+  casos (talla de partida y tasa de crecimiento no realistas), lo que
+  saturaba el radar con 18-27/34 ninos en ROJO cuando deberian ser
+  mayoria VERDE. Se regeneraron usando las medianas (columna M) de las
+  propias tablas LMS-OMS vendorizadas (`vendor/pygrowup/tables/wfa_*` y
+  `lhfa_*`) como base, con variacion aleatoria pequeña alrededor de la
+  mediana (una "tendencia" persistente por niño + ruido por control) en
+  vez de un modelo de crecimiento inventado. Resultado tras regenerar:
+  24 VERDE / 7 AMBAR / 3 ROJO en el radar completo (34 ninos) — mucho
+  mas razonable. 105 mediciones en total (antes 102). Los 10 casos
+  golden (N001-N010) no se tocaron y siguen dando los resultados
+  documentados en `datos/golden.csv`. Verificado corriendo
+  `motor.evaluar_nino()` sobre cada niño de relleno y confirmando que
+  ninguno da un puntaje severo por defecto de generacion.
+- 2026-08-15 — Ampliado el dataset (version original, ya reemplazada
+  arriba): +20 ninos de relleno (N015-N034, con
   trayectorias normales generadas con curvas de crecimiento plausibles,
   2-5 controles cada uno, sin escenario especial) y +65 mediciones. Total
   ahora: 34 ninos, 102 mediciones. Regenerado con cuidado de que ninguna
@@ -54,8 +71,17 @@ Archivos de tu rol: `datos/ninos.csv`, `datos/mediciones.csv`, la parte de
 - [x] Control faltante de varios meses (N010) — solo 2 controles con ~9 meses de hueco
 
 Ninos adicionales (N011-N034) son relleno para que el radar tenga volumen
-razonable (34 ninos, 102 mediciones en total) sin escenario especial mas
+razonable (34 ninos, 105 mediciones en total) sin escenario especial mas
 alla de trayectorias normales con distinta cantidad de controles.
+
+**Nota:** al implementar `motor.py`, Persona A ajusto los datos de N003
+(peso estancado en vez de creciendo lento, para modelar desnutricion
+aguda real), N004 (talla creciendo junto con el peso, para que la
+"recuperacion" sea visible en P/T y no solo en P/E) y N006 (talla de
+partida corregida a un valor fisicamente plausible para 4 meses — el
+valor original daba T/E = 5.27, un caso clinicamente imposible que no
+era el objetivo de esa prueba, que solo queria validar la conversion
+metros->cm). Ver detalle en `docs/estado_motor.md`.
 
 **Nota sobre escala:** este volumen (34 ninos) es solo para que el radar
 se vea con contenido en la demo. No confundir con escala nacional — ver
