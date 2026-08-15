@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import {
   Activity,
   ClipboardPlus,
+  Compass,
   Network,
   ShieldCheck,
   Users,
@@ -77,6 +78,13 @@ export function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
         label="Como esta construido"
         icon={Network}
         activo={estaActivo(pathname, "/arquitectura")}
+        onClick={onNavigate}
+      />
+      <ItemNav
+        href="/potencial"
+        label="Hacia donde va esto"
+        icon={Compass}
+        activo={estaActivo(pathname, "/potencial")}
         onClick={onNavigate}
       />
     </nav>
