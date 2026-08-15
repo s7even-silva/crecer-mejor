@@ -7,6 +7,16 @@ Archivos de tu rol: `datos/ninos.csv`, `datos/mediciones.csv`, la parte de
 
 ## Que hiciste (mas reciente arriba)
 
+- 2026-08-15 — Ampliado el dataset: +20 ninos de relleno (N015-N034, con
+  trayectorias normales generadas con curvas de crecimiento plausibles,
+  2-5 controles cada uno, sin escenario especial) y +65 mediciones. Total
+  ahora: 34 ninos, 102 mediciones. Regenerado con cuidado de que ninguna
+  fecha de medicion sea posterior a hoy (2026-08-15) — el primer intento
+  genero fechas en 2026 futuras que se descartaron. Validado con el mismo
+  script: sin errores, todos los ninos tienen al menos 1 control. Esto es
+  cosmetico (volumen visual del radar para Persona C), no agrega ningun
+  escenario nuevo al golden dataset — los 10 casos siguen siendo N001-N010
+  como antes.
 - 2026-08-15 — Cargados 14 ninos sinteticos (`datos/ninos.csv`) y 37
   mediciones (`datos/mediciones.csv`) cubriendo los 10 escenarios del
   checklist. N002 usa los valores EXACTOS del documento v2.0 (Parte VIII):
@@ -43,6 +53,13 @@ Archivos de tu rol: `datos/ninos.csv`, `datos/mediciones.csv`, la parte de
 - [x] 3 fuentes distintas, misma trayectoria (N009) — CRED / visita domiciliaria / programa social
 - [x] Control faltante de varios meses (N010) — solo 2 controles con ~9 meses de hueco
 
-Ninos adicionales (N011-N014) son relleno para que el radar tenga volumen
-razonable (14 ninos, 37 mediciones en total) sin escenario especial mas
+Ninos adicionales (N011-N034) son relleno para que el radar tenga volumen
+razonable (34 ninos, 102 mediciones en total) sin escenario especial mas
 alla de trayectorias normales con distinta cantidad de controles.
+
+**Nota sobre escala:** este volumen (34 ninos) es solo para que el radar
+se vea con contenido en la demo. No confundir con escala nacional — ver
+seccion "Limite explicito" en `PROYECTO_IA.md`. Añadir mas niños de este
+tipo no mueve el TRL 3 (regla de oro, Parte XIV); si Persona C necesita
+mas volumen para probar paginacion/scroll del radar, generar mas es
+trivial pero es cosmetico, no evidencia.

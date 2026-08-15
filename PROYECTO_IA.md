@@ -56,6 +56,28 @@ llamadas HTTP a un backend. Persona C es quien construye las 4 pantallas de
 `app.py`, llamando directo a las funciones de `motor.py`. Si alguien
 pregunta "quien hace el frontend", la respuesta es Persona C, en `app.py`.
 
+## Limite explicito: el radar no escala a nivel nacional (hoy)
+
+El radar/lista priorizada (Parte III y VIII del documento v2.0) esta
+disenado como una **lista plana** de niños de un establecimiento o un
+numero acotado de casos (decenas a un par de cientos). Esto es correcto y
+suficiente para TRL 3 y para la demo.
+
+**No confundir esto con un radar a escala nacional.** Millones de niños en
+una lista plana no es un problema de "más CSV" — es un problema distinto de
+arquitectura: agregacion jerarquica (region -> red -> establecimiento ->
+niño), paginacion server-side, e indices en una base de datos real
+(no CSV ni SQLite en un solo archivo). Eso es TRL 5-6, no TRL 3, y
+requeriria ademas resolver de donde vienen los datos a esa escala (HIS-MINSA,
+SIEN — ver F5 del documento), lo cual es un problema institucional, no solo
+tecnico.
+
+Si el jurado pregunta por escala nacional, la respuesta honesta es: *"el
+prototipo de hoy opera a nivel de establecimiento; la arquitectura para
+escala nacional (agregacion jerarquica, paginacion, base de datos real)
+esta en el roadmap TRL 5-6, condicionada a integracion con HIS-MINSA/SIEN"*.
+No prometer algo que la maqueta no sostiene.
+
 ## Reglas innegociables (Parte XIV del documento v2.0)
 
 1. Si no alimenta a uno de los 4 artefactos de TRL 3, hoy no se hace.

@@ -15,6 +15,10 @@ Formato de cada linea: `HH:MM — Rol — resumen de una linea`.
 - 15:00 — Datos B — 14 ninos / 37 mediciones cargados, 10/10 escenarios del
   checklist cubiertos, N002 verificado con pygrowup real (descenso oculto
   confirmado). Detalle en `docs/estado_datos.md`.
+- 16:00 — Datos B — Ampliado a 34 ninos / 102 mediciones (relleno cosmetico
+  para el radar, sin escenarios nuevos). Documentado el limite de escala
+  nacional (radar es de nivel establecimiento, no nacional) en
+  `PROYECTO_IA.md` y `docs/estado_pitch.md` para la respuesta al jurado.
 
 ## Persona C — App (`app.py`)
 
