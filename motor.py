@@ -404,7 +404,18 @@ def evaluar_nino(nino: dict, mediciones: list[dict],
             dias_desde_ultimo_control=dias_desde_ultimo,
         )
     else:
-        prio = {"puntaje": 0, "nivel": "VERDE", "razones": ["sin controles validos"]}
+        # Sin ningun control valido no es lo mismo que "sano": es un
+        # vacio de informacion (datos rechazados por implausibles o
+        # nunca medido). Se marca AMBAR, no VERDE, para que requiera
+        # revision -- VERDE comunicaria "sin riesgo", que es falso
+        # cuando en realidad no hay ningun dato confiable que lo respalde.
+        razones = ["Sin controles validos: se requiere remedicion"]
+        for c in controles:
+            if not c["valido"]:
+                razones.extend(
+                    f"{c['fecha']}: {r}" for r in c["razones_invalidez"]
+                )
+        prio = {"puntaje": 35, "nivel": "AMBAR", "razones": razones}
 
     return {
         "controles": controles,
