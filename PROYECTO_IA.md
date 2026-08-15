@@ -50,6 +50,15 @@ Auth, RLS, ML entrenado, ni LLM en vivo durante la demo. La razon completa
 esta en la Parte I y VII de `Crecer_Mejor_v2_Documento_Corregido.md`: ese
 stack se probo demasiado pesado para 18 horas y se recorto deliberadamente.
 
+**`pygrowup` esta vendorizado en `vendor/pygrowup/`, no en
+`requirements.txt`.** El paquete de PyPI tiene un bug de build irreparable
+por configuracion (su `setup.py` necesita `six` antes de que pip lo
+instale) que rompe tanto en Codespaces como, mas grave, en Streamlit Cloud
+(que usa `uv`, sin control nuestro sobre el orden de instalacion). La
+solucion fue copiar su codigo fuente al repo sin esa dependencia rota. Usa
+`from vendor.pygrowup import Calculator`, nunca `pip install pygrowup`.
+Detalle completo en la nota tecnica de `README.md`.
+
 **No hay "frontend" separado.** Con Streamlit, `app.py` es a la vez la
 logica de pantalla y la interfaz — no hay React, no hay CSS a mano, no hay
 llamadas HTTP a un backend. Persona C es quien construye las 4 pantallas de

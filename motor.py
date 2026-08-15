@@ -2,7 +2,7 @@
 # LMS-OMS con restriccion de colas, validacion, tendencia y priorizacion.
 # Ver Crecer_Mejor_v2_Documento_Corregido.md, Parte IV.
 
-from pygrowup import Calculator
+from vendor.pygrowup import Calculator
 
 calc = Calculator(adjust_height_data=False, adjust_weight_scores=True, include_cdc=False)
 

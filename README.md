@@ -59,8 +59,9 @@ prototipo accesible en internet despues:
 3. Repository: `s7even-silva/crecer-mejor`, branch `main`, main file `app.py`.
 4. Deploy. Cada push a `main` redeploya automaticamente despues.
 
-`requirements.txt` ya esta preparado para que esto funcione sin pasos
-adicionales (ver nota sobre `pygrowup`/`six` mas abajo).
+`requirements.txt` solo tiene `streamlit` y `pandas` (ambos con wheels
+precompilados) — funciona en Streamlit Cloud sin pasos adicionales. Ver
+nota sobre `vendor/pygrowup/` mas abajo.
 
 ## Estructura
 
@@ -69,6 +70,8 @@ crecer-mejor/
 ├── motor.py              # el TRL 3: LMS-OMS, validacion, tendencia, prioridad
 ├── app.py                # Streamlit, 4 pantallas
 ├── verificacion.py        # genera la tabla de verificacion contra referencia OMS
+├── vendor/
+│   └── pygrowup/          # pygrowup vendorizado (ver nota tecnica abajo)
 ├── datos/
 │   ├── ninos.csv
 │   ├── mediciones.csv
@@ -76,9 +79,27 @@ crecer-mejor/
 └── .devcontainer/         # entorno reproducible para Codespaces
 ```
 
-## Nota tecnica: orden de `requirements.txt`
+## Nota tecnica: `pygrowup` esta vendorizado, no en `requirements.txt`
 
-`setuptools`, `wheel` y `six` van primero a proposito. `pygrowup` 0.8.2 hace
-`import six` dentro de su propio `setup.py` sin declararlo como dependencia
-de build, asi que si `six` no esta ya instalado antes de que pip intente
-construirlo, la instalacion falla. No reordenar ni quitar esas tres lineas.
+`pygrowup` 0.8.2 (la unica version moderna en PyPI) tiene un bug real: su
+`setup.py` ejecuta `import pygrowup` para leer el numero de version, lo
+que dispara `import six` en su modulo principal — pero `six` recien se
+instalaria *despues*, como parte de `install_requires`. El propio proceso
+de build nunca ve `six` a tiempo. Esto rompe la instalacion tanto con
+`pip` como con `uv` (el instalador que usa Streamlit Community Cloud),
+sin importar el orden de `requirements.txt` ni las flags de pip usadas
+(se probaron `--no-build-isolation` y preinstalar `six`/`setuptools`
+manualmente; funciona en Codespaces porque ahi controlamos el comando de
+instalacion en dos pasos, pero Streamlit Cloud no da ese control).
+
+La solucion fue copiar el codigo fuente de `pygrowup` a `vendor/pygrowup/`
+(quitando `setup.py`, `tests.py` y el unico uso real de `six.string_types`,
+reemplazado por `str` nativo de Python 3) y importarlo como
+`from vendor.pygrowup import Calculator` en vez de instalarlo por pip.
+Es codigo Python puro mas las tablas LMS-OMS oficiales (~1.4 MB de JSON),
+sin compilacion nativa de por medio, asi que no hay nada que pueda fallar
+en el build. Verificado: el caso de referencia del documento (varon 24
+meses, 10.5 kg) sigue dando z = -1.28 exactamente igual que con el paquete
+de PyPI.
+
+No reinstalar `pygrowup` via pip ni borrar `vendor/pygrowup/`.

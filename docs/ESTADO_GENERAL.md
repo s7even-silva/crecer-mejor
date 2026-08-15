@@ -8,7 +8,11 @@ Formato de cada linea: `HH:MM — Rol — resumen de una linea`.
 
 ## Persona A — Motor (`motor.py`, `verificacion.py`)
 
-- (sin entradas todavia)
+- 16:30 — Motor A — CRITICO: pygrowup fallaba al desplegar en Streamlit
+  Cloud (bug de build con six, ni pip ni uv lo resuelven). Vendorizado en
+  `vendor/pygrowup/`. `motor.py` cambio su import a `from vendor.pygrowup
+  import Calculator`. Si estas trabajando sobre una copia vieja del repo,
+  haz `git pull` antes de tocar motor.py. Detalle en `docs/estado_motor.md`.
 
 ## Persona B — Datos (`datos/*.csv`)
 
