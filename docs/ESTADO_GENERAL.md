@@ -18,6 +18,17 @@ Formato de cada linea: `HH:MM — Rol — resumen de una linea`.
   OMS: error maximo 0.1 DE. Los 4 artefactos de TRL 3 estan completos.
   Contrato de `evaluar_nino()` documentado para Persona C. Detalle en
   `docs/estado_motor.md`.
+- 19:00 — Motor A (via main) — Persona A subio una segunda
+  implementacion de motor.py/verificacion.py/datos a `main` (esquema de
+  columnas distinto, sin P/T, pygrowup por pip en vez de vendorizado) mas
+  `api.py` (FastAPI) y `generar_datos.py`. Se integro a `deploy` con
+  `git merge`: los 4 archivos en conflicto se resolvieron manteniendo la
+  version ya probada en `deploy` (razones completas en el commit de
+  merge `b267b7b`), `api.py` y `generar_datos.py` se incorporaron tal
+  cual, presentes en el repo pero no conectados a la demo de esta noche.
+  **Si sigues trabajando en motor.py: usa la version que ya esta en el
+  repo, no la seguiste subiendo por separado, para evitar volver a
+  divergir.**
 
 ## Persona B — Datos (`datos/*.csv`)
 
