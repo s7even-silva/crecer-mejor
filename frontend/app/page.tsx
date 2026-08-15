@@ -25,9 +25,9 @@ export default async function RadarPage() {
           Radar de prioridad
         </h1>
         <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">
-          Lista priorizada de ninos de este establecimiento. No es una
+          Lista priorizada de niños de este establecimiento. No es una
           probabilidad clinica: es un puntaje deterministico y auditable (ver
-          razones en el perfil de cada nino).
+          razones en el perfil de cada niño).
         </p>
       </div>
 
@@ -121,7 +121,7 @@ export default async function RadarPage() {
         <Card className="border-dashed">
           <CardContent className="flex flex-col items-center gap-2 py-10 text-center text-muted-foreground">
             <AlertCircle className="h-8 w-8" />
-            <p className="text-sm">No hay ninos con mediciones registradas.</p>
+            <p className="text-sm">No hay niños con mediciones registradas.</p>
           </CardContent>
         </Card>
       )}

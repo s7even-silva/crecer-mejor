@@ -16,7 +16,7 @@ import { Separator } from "@/components/ui/separator";
 
 const PANTALLAS = [
   { href: "/", label: "Radar", icon: Activity },
-  { href: "/ninos", label: "Perfil del nino", icon: Users },
+  { href: "/ninos", label: "Perfil del niño", icon: Users },
   { href: "/nueva-medicion", label: "Nueva medicion", icon: ClipboardPlus },
   { href: "/verificacion", label: "Verificacion", icon: ShieldCheck },
 ];

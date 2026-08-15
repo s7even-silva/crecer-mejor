@@ -12,7 +12,7 @@ export default async function ListaNinosPage() {
           Perfil y trayectoria
         </h1>
         <p className="mt-1.5 text-sm text-muted-foreground">
-          Selecciona un nino para ver su perfil.
+          Selecciona un niño para ver su perfil.
         </p>
       </div>
 

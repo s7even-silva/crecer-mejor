@@ -35,10 +35,10 @@ export default function FormularioNuevaMedicion({ ninos }: { ninos: Nino[] }) {
         <CardContent>
           <form action={formAction} className="flex flex-col gap-5">
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="nino_id">Nino</Label>
+              <Label htmlFor="nino_id">Niño</Label>
               <Select name="nino_id" defaultValue={ninos[0]?.id}>
                 <SelectTrigger id="nino_id" className="w-full">
-                  <SelectValue placeholder="Selecciona un nino">
+                  <SelectValue placeholder="Selecciona un niño">
                     {(value: string) =>
                       ninos.find((n) => n.id === value)?.codigo ?? value
                     }

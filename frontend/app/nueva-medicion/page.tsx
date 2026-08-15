@@ -11,7 +11,7 @@ export default async function NuevaMedicionPage() {
           Registrar nueva medicion
         </h1>
         <p className="mt-1.5 max-w-xl text-sm text-muted-foreground">
-          Al guardar, el historial, la curva y la prioridad de este nino se
+          Al guardar, el historial, la curva y la prioridad de este niño se
           recalculan en vivo con el motor real.
         </p>
       </div>

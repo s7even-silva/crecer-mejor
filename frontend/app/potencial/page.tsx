@@ -21,7 +21,7 @@ export default function PotencialPage() {
         No inventamos una encuesta nueva: usamos el peso y la talla que
         CRED ya obliga a registrar. La plataforma lee lo que ya existe
         (HIS-MINSA, SIEN, Padron Nominal), no compite con eso. Y sigue al
-        nino, no al establecimiento: si se atiende en Lima y despues en
+        niño, no al establecimiento: si se atiende en Lima y despues en
         provincia, es la misma trayectoria.
       </p>
 
@@ -32,7 +32,7 @@ export default function PotencialPage() {
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
           <ComparaCard
             malo="Un reporte por establecimiento"
-            bueno="Un historial por nino"
+            bueno="Un historial por niño"
           />
           <ComparaCard
             malo="Muestra el ultimo control"

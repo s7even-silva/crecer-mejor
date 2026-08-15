@@ -65,7 +65,7 @@ const FILAS: Fila[] = [
       { id: "login", icono: Shield, titulo: "Login por rol", nota: "Cada quien entra con su propio usuario" },
       { id: "personal", icono: Stethoscope, titulo: "Salud", nota: "Ve su radar completo" },
       { id: "comunitario", icono: Users, titulo: "Comunitario", nota: "Ve solo sus casos asignados" },
-      { id: "familia", icono: Baby, titulo: "Familia", nota: "Ve solo a su propio nino" },
+      { id: "familia", icono: Baby, titulo: "Familia", nota: "Ve solo a su propio niño" },
       { id: "ia", icono: Sparkles, titulo: "IA", nota: "Explica el resultado, no lo calcula ni diagnostica" },
     ],
   },
