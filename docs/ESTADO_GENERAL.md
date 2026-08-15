@@ -12,7 +12,9 @@ Formato de cada linea: `HH:MM — Rol — resumen de una linea`.
 
 ## Persona B — Datos (`datos/*.csv`)
 
-- (sin entradas todavia)
+- 15:00 — Datos B — 14 ninos / 37 mediciones cargados, 10/10 escenarios del
+  checklist cubiertos, N002 verificado con pygrowup real (descenso oculto
+  confirmado). Detalle en `docs/estado_datos.md`.
 
 ## Persona C — App (`app.py`)
 
