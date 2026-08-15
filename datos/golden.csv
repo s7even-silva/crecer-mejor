@@ -1,0 +1,11 @@
+id,escenario,resultado_esperado
+G01,Trayectoria estable en canal,VERDE en los 3 controles
+G02,Descenso progresivo sin cruzar corte,Clasificacion Normal + prioridad AMBAR
+G03,Desnutricion aguda establecida,ROJO clasificacion Desnutricion aguda
+G04,Recuperacion post-intervencion,Tendencia ascendente prioridad decreciente
+G05,Mismo dato en g y en kg,Z-scores identicos
+G06,Talla en metros,Normalizacion correcta sin error
+G07,Peso de 85 kg en nino de 2 anos,Rechazado por validacion pre-z
+G08,z = -5.3 real,Aceptado flag BIV confianza degradada a baja
+G09,3 fuentes distintas misma trayectoria,Historial unificado y ordenado
+G10,Control faltante de 8 meses,Penalizacion por adherencia en el puntaje

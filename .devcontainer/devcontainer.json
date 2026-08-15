@@ -1,0 +1,32 @@
+{
+  "name": "crecer-mejor",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+
+  "postCreateCommand": "pip install --user -r requirements.txt",
+
+  "forwardPorts": [8501],
+  "portsAttributes": {
+    "8501": {
+      "label": "Streamlit (app.py)",
+      "onAutoForward": "openPreview"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "streetsidesoftware.code-spell-checker-spanish",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "editor.formatOnSave": false
+      }
+    }
+  },
+
+  "remoteUser": "vscode"
+}
