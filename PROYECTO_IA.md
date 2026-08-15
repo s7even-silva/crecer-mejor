@@ -50,6 +50,12 @@ Auth, RLS, ML entrenado, ni LLM en vivo durante la demo. La razon completa
 esta en la Parte I y VII de `Crecer_Mejor_v2_Documento_Corregido.md`: ese
 stack se probo demasiado pesado para 18 horas y se recorto deliberadamente.
 
+**No hay "frontend" separado.** Con Streamlit, `app.py` es a la vez la
+logica de pantalla y la interfaz — no hay React, no hay CSS a mano, no hay
+llamadas HTTP a un backend. Persona C es quien construye las 4 pantallas de
+`app.py`, llamando directo a las funciones de `motor.py`. Si alguien
+pregunta "quien hace el frontend", la respuesta es Persona C, en `app.py`.
+
 ## Reglas innegociables (Parte XIV del documento v2.0)
 
 1. Si no alimenta a uno de los 4 artefactos de TRL 3, hoy no se hace.
