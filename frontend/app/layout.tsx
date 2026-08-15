@@ -31,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           disableTransitionOnChange
         >
           <div className="flex min-h-full">
-            <aside className="hidden w-64 shrink-0 flex-col border-r bg-card lg:flex">
+            <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col border-r bg-card lg:flex">
               <div className="flex h-14 items-center gap-2 border-b px-5 text-sm font-semibold">
                 <Leaf className="h-4.5 w-4.5 text-primary" />
                 Crecer Mejor

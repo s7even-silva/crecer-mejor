@@ -157,7 +157,7 @@ export default function FormularioNuevaMedicion({ ninos }: { ninos: Nino[] }) {
             <NivelDot nivel={resultado.evaluacion.prioridad.nivel} className="h-4 w-4" />
             <CardTitle className="text-lg">
               Nueva prioridad: {resultado.evaluacion.prioridad.nivel} (
-              {resultado.evaluacion.prioridad.puntaje}/100)
+              {resultado.evaluacion.prioridad.puntaje}%)
             </CardTitle>
           </CardHeader>
           <CardContent>

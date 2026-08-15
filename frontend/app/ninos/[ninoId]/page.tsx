@@ -46,7 +46,7 @@ export default async function PerfilNinoPage({
         <CardHeader className="flex-row items-center gap-3 space-y-0">
           <NivelDot nivel={prioridad.nivel} className="h-4 w-4" />
           <CardTitle className="text-lg">
-            Prioridad: {prioridad.nivel} ({prioridad.puntaje}/100)
+            Prioridad: {prioridad.nivel} ({prioridad.puntaje}%)
           </CardTitle>
         </CardHeader>
         <CardContent>
