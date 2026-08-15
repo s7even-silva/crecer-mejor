@@ -1,16 +1,22 @@
+import { CheckCircle2, TrendingDown, XCircle } from "lucide-react";
 import { api, type Control } from "@/lib/api";
-
-const NIVEL_COLOR: Record<string, string> = {
-  ROJO: "bg-red-100 text-red-800",
-  AMBAR: "bg-amber-100 text-amber-800",
-  VERDE: "bg-green-100 text-green-800",
-};
-
-const NIVEL_EMOJI: Record<string, string> = {
-  ROJO: "\u{1F534}",
-  AMBAR: "\u{1F7E1}",
-  VERDE: "\u{1F7E2}",
-};
+import { NivelBadge, NivelDot } from "@/components/nivel-badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export default async function PerfilNinoPage({
   params,
@@ -23,100 +29,179 @@ export default async function PerfilNinoPage({
     api.evaluacion(ninoId),
   ]);
   const nino = ninos.find((n) => n.id === ninoId);
-  const { prioridad, controles } = evaluacion;
+  const { prioridad, controles, tendencia } = evaluacion;
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold">Perfil y trayectoria</h1>
-      <p className="mt-1 text-gray-500">{nino?.codigo ?? ninoId}</p>
-
-      <div className="mt-6 flex items-center gap-3">
-        <span className="text-2xl">{NIVEL_EMOJI[prioridad.nivel]}</span>
-        <h2 className="text-xl font-semibold">
-          Prioridad: {prioridad.nivel} ({prioridad.puntaje}/100)
-        </h2>
+    <div className="flex flex-col gap-6">
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          Perfil y trayectoria
+        </h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {nino?.codigo ?? ninoId} &middot; {nino?.sexo === "F" ? "Femenino" : "Masculino"}
+        </p>
       </div>
-      <ul className="mt-2 list-disc pl-6 text-gray-700">
-        {prioridad.razones.map((r, i) => (
-          <li key={i}>{r}</li>
-        ))}
-      </ul>
 
-      <h2 className="mt-8 text-xl font-semibold">Curva de z-score (peso/talla)</h2>
-      <ZScoreTable controles={controles} />
+      <Card>
+        <CardHeader className="flex-row items-center gap-3 space-y-0">
+          <NivelDot nivel={prioridad.nivel} className="h-4 w-4" />
+          <CardTitle className="text-lg">
+            Prioridad: {prioridad.nivel} ({prioridad.puntaje}/100)
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ul className="flex flex-col gap-1.5 text-sm text-muted-foreground">
+            {prioridad.razones.map((r, i) => (
+              <li key={i} className="flex gap-2">
+                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground" />
+                {r}
+              </li>
+            ))}
+          </ul>
+          {tendencia.descenso_detectado && (
+            <div className="mt-3 flex items-center gap-2 rounded-md bg-nivel-ambar-bg px-3 py-2 text-sm text-nivel-ambar">
+              <TrendingDown className="h-4 w-4 shrink-0" />
+              Descenso detectado por cruce de canal percentilar
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
-      <h2 className="mt-8 text-xl font-semibold">Historial de controles</h2>
-      <div className="mt-3 flex flex-col gap-3">
-        {controles.map((c, i) => (
-          <details
-            key={i}
-            className="rounded border border-gray-200 p-3"
-            open={i === controles.length - 1}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base">Curva de z-score (peso/talla)</CardTitle>
+        </CardHeader>
+        <CardContent className="px-0 sm:px-6">
+          <div className="overflow-x-auto px-6 sm:px-0">
+            <Table>
+              <TableHeader>
+                <TableRow className="hover:bg-transparent">
+                  <TableHead>Fecha</TableHead>
+                  <TableHead className="text-right">P/E</TableHead>
+                  <TableHead className="text-right">T/E</TableHead>
+                  <TableHead className="text-right">P/T</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {controles.map((c, i) => (
+                  <TableRow key={i}>
+                    <TableCell className="whitespace-nowrap">{c.fecha}</TableCell>
+                    <ZCell valor={c.valido ? c.zscores["P/E"] : undefined} />
+                    <ZCell valor={c.valido ? c.zscores["T/E"] : undefined} />
+                    <ZCell valor={c.valido ? c.zscores["P/T"] : undefined} />
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base">Historial de controles</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Accordion
+            defaultValue={[`c-${controles.length - 1}`]}
+            className="w-full"
           >
-            <summary className="cursor-pointer font-medium">
-              {c.fecha} &middot; {c.fuente} &middot;{" "}
-              {c.valido ? "✅ valido" : "❌ invalido"}
-            </summary>
-            {!c.valido ? (
-              <p className="mt-2 text-red-700">
-                Razones de invalidez: {c.razones_invalidez.join("; ")}
-              </p>
-            ) : (
-              <div className="mt-2 space-y-1 text-sm text-gray-700">
-                <p>
-                  Peso: {c.peso_kg} kg (original: {c.peso_original[0]}{" "}
-                  {c.peso_original[1]})
-                </p>
-                <p>
-                  Talla: {c.talla_cm} cm (original: {c.talla_original[0]}{" "}
-                  {c.talla_original[1]})
-                </p>
-                <p>Edad: {c.edad_meses} meses</p>
-                <p>
-                  Z-scores: P/E {c.zscores["P/E"]} &middot; T/E{" "}
-                  {c.zscores["T/E"]} &middot; P/T {c.zscores["P/T"]}
-                </p>
-                <p>
-                  Clasificacion: P/E {c.clasificacion["P/E"]} &middot; T/E{" "}
-                  {c.clasificacion["T/E"]} &middot; P/T {c.clasificacion["P/T"]}
-                </p>
-                <p>Confianza: {c.confianza}</p>
-                {Object.values(c.flags_biv).some(Boolean) && (
-                  <p className="text-amber-700">
-                    Flags BIV (valor biologicamente implausible):{" "}
-                    {JSON.stringify(c.flags_biv)}
-                  </p>
-                )}
-              </div>
-            )}
-          </details>
-        ))}
-      </div>
+            {controles.map((c, i) => (
+              <AccordionItem key={i} value={`c-${i}`}>
+                <AccordionTrigger className="text-sm hover:no-underline">
+                  <span className="flex flex-1 items-center gap-2.5">
+                    {c.valido ? (
+                      <CheckCircle2 className="h-4 w-4 shrink-0 text-nivel-verde" />
+                    ) : (
+                      <XCircle className="h-4 w-4 shrink-0 text-nivel-rojo" />
+                    )}
+                    <span className="font-medium">{c.fecha}</span>
+                    <span className="text-muted-foreground">{c.fuente}</span>
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent>
+                  {!c.valido ? (
+                    <p className="rounded-md bg-nivel-rojo-bg px-3 py-2 text-sm text-nivel-rojo">
+                      Razones de invalidez: {c.razones_invalidez.join("; ")}
+                    </p>
+                  ) : (
+                    <DetalleControl control={c} />
+                  )}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </CardContent>
+      </Card>
     </div>
   );
 }
 
-function ZScoreTable({ controles }: { controles: Control[] }) {
+function ZCell({ valor }: { valor: number | undefined }) {
+  if (valor === undefined) {
+    return <TableCell className="text-right text-muted-foreground">&mdash;</TableCell>;
+  }
+  return <TableCell className="text-right tabular-nums">{valor}</TableCell>;
+}
+
+function DetalleControl({ control: c }: { control: Control }) {
+  const hayBiv = Object.values(c.flags_biv).some(Boolean);
+
   return (
-    <table className="mt-3 w-full max-w-xl text-sm border-collapse">
-      <thead>
-        <tr className="border-b border-gray-200 text-left text-gray-500">
-          <th className="py-1 pr-4">Fecha</th>
-          <th className="py-1 pr-4">P/E</th>
-          <th className="py-1 pr-4">T/E</th>
-          <th className="py-1 pr-4">P/T</th>
-        </tr>
-      </thead>
-      <tbody>
-        {controles.map((c, i) => (
-          <tr key={i} className="border-b border-gray-100">
-            <td className="py-1 pr-4">{c.fecha}</td>
-            <td className="py-1 pr-4">{c.valido ? c.zscores["P/E"] : "-"}</td>
-            <td className="py-1 pr-4">{c.valido ? c.zscores["T/E"] : "-"}</td>
-            <td className="py-1 pr-4">{c.valido ? c.zscores["P/T"] : "-"}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className="grid gap-3 text-sm sm:grid-cols-2">
+      <Dato
+        label="Peso"
+        valor={`${c.peso_kg} kg`}
+        original={`${c.peso_original[0]} ${c.peso_original[1]}`}
+      />
+      <Dato
+        label="Talla"
+        valor={`${c.talla_cm} cm`}
+        original={`${c.talla_original[0]} ${c.talla_original[1]}`}
+      />
+      <Dato label="Edad" valor={`${c.edad_meses} meses`} />
+      <Dato label="Confianza" valor={c.confianza ?? "normal"} />
+
+      <div className="sm:col-span-2">
+        <Separator className="my-1" />
+      </div>
+
+      <Dato
+        label="Z-scores"
+        valor={`P/E ${c.zscores["P/E"]} · T/E ${c.zscores["T/E"]} · P/T ${c.zscores["P/T"]}`}
+      />
+      <Dato
+        label="Clasificacion"
+        valor={`${c.clasificacion["P/E"]} · ${c.clasificacion["T/E"]} · ${c.clasificacion["P/T"]}`}
+      />
+
+      {hayBiv && (
+        <div className="rounded-md bg-nivel-ambar-bg px-3 py-2 text-nivel-ambar sm:col-span-2">
+          Flags BIV (valor biologicamente implausible) presentes en este control.
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Dato({
+  label,
+  valor,
+  original,
+}: {
+  label: string;
+  valor: string;
+  original?: string;
+}) {
+  return (
+    <div>
+      <div className="text-xs font-medium text-muted-foreground">{label}</div>
+      <div>
+        {valor}
+        {original && (
+          <span className="text-muted-foreground"> (original: {original})</span>
+        )}
+      </div>
+    </div>
   );
 }
