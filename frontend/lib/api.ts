@@ -1,4 +1,7 @@
-const API_URL = process.env.API_URL ?? "http://localhost:8000";
+// Se quita cualquier barra final: si la variable de entorno del
+// proveedor (Railway/Vercel) trae "https://host/" en vez de
+// "https://host", "${API_URL}${path}" produce "host//radar" -> 404.
+const API_URL = (process.env.API_URL ?? "http://localhost:8000").replace(/\/+$/, "");
 
 export type Nino = {
   id: string;
