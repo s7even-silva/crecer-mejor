@@ -8,11 +8,21 @@ Formato de cada linea: `HH:MM — Rol — resumen de una linea`.
 
 ## Persona A — Motor (`motor.py`, `verificacion.py`)
 
-- (sin entradas todavia)
+- 16:30 — Motor A — CRITICO: pygrowup fallaba al desplegar en Streamlit
+  Cloud (bug de build con six, ni pip ni uv lo resuelven). Vendorizado en
+  `vendor/pygrowup/`. `motor.py` cambio su import a `from vendor.pygrowup
+  import Calculator`. Si estas trabajando sobre una copia vieja del repo,
+  haz `git pull` antes de tocar motor.py. Detalle en `docs/estado_motor.md`.
 
 ## Persona B — Datos (`datos/*.csv`)
 
-- (sin entradas todavia)
+- 15:00 — Datos B — 14 ninos / 37 mediciones cargados, 10/10 escenarios del
+  checklist cubiertos, N002 verificado con pygrowup real (descenso oculto
+  confirmado). Detalle en `docs/estado_datos.md`.
+- 16:00 — Datos B — Ampliado a 34 ninos / 102 mediciones (relleno cosmetico
+  para el radar, sin escenarios nuevos). Documentado el limite de escala
+  nacional (radar es de nivel establecimiento, no nacional) en
+  `PROYECTO_IA.md` y `docs/estado_pitch.md` para la respuesta al jurado.
 
 ## Persona C — App (`app.py`)
 

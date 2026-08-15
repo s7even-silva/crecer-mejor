@@ -1,3 +1,2 @@
-pygrowup
 streamlit
 pandas

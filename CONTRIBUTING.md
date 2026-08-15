@@ -44,10 +44,15 @@ Reglas para que esto no choque:
 |---|---|---|---|
 | A | `motor.py`, `verificacion.py` | `docs/estado_motor.md` | Motor antropometrico, golden dataset, tabla de verificacion |
 | B | `datos/ninos.csv`, `datos/mediciones.csv` | `docs/estado_datos.md` | Datos sinteticos, casos de unidades/fuentes mixtas |
-| C | `app.py` | `docs/estado_app.md` | Interfaz Streamlit: radar, perfil, registro, verificacion |
+| C | `app.py` | `docs/estado_app.md` | **Frontend/interfaz** (Streamlit): radar, perfil, registro, verificacion |
 | D | `README.md`, diapositivas (fuera del repo o en `docs/`) | `docs/estado_pitch.md` | Pitch, cifras ENDES, normativa, ensayo, plan B de demo |
 
 Todos anaden ademas una linea de progreso a `docs/ESTADO_GENERAL.md`.
+
+**Nota sobre el "frontend":** no hay frontend separado en Next.js/React. Con
+Streamlit, `app.py` es a la vez la logica y la interfaz — Persona C escribe
+codigo Python que Streamlit convierte en pantallas web automaticamente. Esa
+es la respuesta a "quien hace el frontend": Persona C, en `app.py`.
 
 ## Regla de oro
 

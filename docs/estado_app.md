@@ -1,8 +1,9 @@
-# Estado — Persona C (app.py)
+# Estado — Persona C (app.py) — Frontend/interfaz
 
 Lee `PROYECTO_IA.md` antes de esto si no lo has hecho.
 
-Archivo de tu rol: `app.py`.
+Archivo de tu rol: `app.py`. Eres el "frontend" del proyecto: no hay
+Next.js/React, Streamlit convierte tu codigo Python en la interfaz web.
 
 ## Que hiciste (mas reciente arriba)
 
