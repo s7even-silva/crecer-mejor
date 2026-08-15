@@ -8,6 +8,12 @@ de que un control puntual cruce un punto de corte.
 Documento de referencia: `Crecer_Mejor_v2_Documento_Corregido.md` (corrige y
 recorta la propuesta original a lo que es viable en 18 horas).
 
+> **Nota:** esta rama (`deploy`/`main`) es la demo Streamlit-only, la que
+> se presenta en la hackaton. Existe ademas la rama `arquitectura-v2`, con
+> un stack mas completo (Next.js + FastAPI + Postgres) desplegado en
+> Vercel/Railway/Neon, en paralelo — no reemplaza esta demo, es la version
+> para seguir evolucionando el proyecto despues.
+
 ## Empezar a trabajar (Codespaces)
 
 1. En GitHub: `Code` -> `Codespaces` -> `Create codespace on main`.
